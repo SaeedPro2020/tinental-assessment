@@ -5,24 +5,32 @@
   declare const $$restProps: Record<string, any>;
   import { onMount, createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
-  let el: HTMLButtonElement | null = null;
+  let el: HTMLElement | null = null;
 
   onMount(() => {
     console.log('Dialog.Trigger mounted');
   });
 </script>
 
-<button
+<span
   bind:this={el}
   class={className}
+  role="button"
+  tabindex="0"
   {...$$restProps}
   on:click={() => {
-    console.log('Dialog.Trigger: button clicked');
-    // dispatch a Svelte component event
+    console.log('Dialog.Trigger: activated');
     dispatch('dialog-trigger');
-    // also dispatch a DOM CustomEvent on the button element so parent DOM listeners receive it
     if (el) el.dispatchEvent(new CustomEvent('dialog-trigger', { bubbles: true }));
+  }}
+  on:keydown={(e: KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      console.log('Dialog.Trigger: keyboard activate');
+      dispatch('dialog-trigger');
+      if (el) el.dispatchEvent(new CustomEvent('dialog-trigger', { bubbles: true }));
+    }
   }}
 >
   <slot />
-</button>
+</span>

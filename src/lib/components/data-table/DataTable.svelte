@@ -128,7 +128,7 @@
 
 <div class="w-full">
   <!-- Search bar -->
-  <div class="flex items-center py-4">
+  <div class="flex items-center py-4 mb-4">
     <Input
       placeholder="Search..."
       value={
@@ -140,7 +140,7 @@
           e.currentTarget.value
         )
       }
-      class="max-w-sm"
+      class="max-w-xs mb-2"
     />
 
     <!-- Column visibility dropdown -->
@@ -168,7 +168,7 @@
   </div>
 
   <!-- TABLE -->
-  <div class="rounded-md border">
+  <div class="rounded-md border mt-8">
     <Table.Root>
       <Table.Header>
         {#each table.getHeaderGroups() as headerGroup}

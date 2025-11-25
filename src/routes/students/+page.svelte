@@ -53,13 +53,10 @@
 </script>
 <h1 class="text-2xl font-bold mb-6">Students</h1>
 
-<div class="flex justify-center mb-6">
+<div class="flex justify-center mb-12">
   <Dialog.Root bind:open={dialogOpen}>
-    <Dialog.Trigger
-      className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
-      on:click={() => { console.log('Dialog.Trigger clicked'); dialogOpen = true; }}
-    >
-      Add Student
+    <Dialog.Trigger on:click={() => { console.log('Dialog.Trigger clicked'); dialogOpen = true; }}>
+      <Button size="lg" class="bg-white text-black rounded-lg text-base" style="background:#fff;color:#000;min-height:44px;padding-left:18px;padding-right:18px;border-radius:8px">Add Student</Button>
     </Dialog.Trigger>
     <Dialog.Content open={dialogOpen} onClose={() => (dialogOpen = false)} class="sm:max-w-[425px]">
       <Dialog.Header>
@@ -102,6 +99,9 @@
     </Dialog.Content>
   </Dialog.Root>
 </div>
+
+<!-- Spacer to guarantee visual separation between the add-student area and the table -->
+<div style="height:2rem;"></div>
 
 {#key students.length}
   <div class="flex justify-center mt-12">
