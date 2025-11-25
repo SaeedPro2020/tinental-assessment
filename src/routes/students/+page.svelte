@@ -68,20 +68,20 @@
 
   <div class="grid gap-y-6 gap-x-4 py-8 border-none" style="border: none;">
         <div class="grid grid-cols-4 items-center gap-4 mb-4" style="margin-bottom:16px !important;">
-          <Label for="first" class="text-end">First Name</Label>
-          <Input id="first" class="col-span-3 max-w-[28rem] ml-6" bind:value={firstName} style="border-radius:0.5rem;margin-left:1.5rem;padding:0.5rem 0.75rem;box-shadow:0 1px 2px rgba(16,24,40,0.04);" />
+          <Label for="first" class="text-end" style="margin-left:1.2rem;">First Name</Label>
+          <Input id="first" class="col-span-3 max-w-[22rem] ml-6" bind:value={firstName} style="border-radius:0.5rem;margin-left:1rem;padding:0.5rem 0.75rem;box-shadow:0 1px 2px rgba(16,24,40,0.04);" />
         </div>
         <div class="grid grid-cols-4 items-center gap-4 mb-4" style="margin-bottom:16px !important;">
-          <Label for="last" class="text-end">Last Name</Label>
-          <Input id="last" class="col-span-3 max-w-[28rem] ml-6" bind:value={lastName} style="border-radius:0.5rem;margin-left:1.5rem;padding:0.5rem 0.75rem;box-shadow:0 1px 2px rgba(16,24,40,0.04);" />
+          <Label for="last" class="text-end" style="margin-left:1.2rem;">Last Name</Label>
+          <Input id="last" class="col-span-3 max-w-[22rem] ml-6" bind:value={lastName} style="border-radius:0.5rem;margin-left:1rem;padding:0.5rem 0.75rem;box-shadow:0 1px 2px rgba(16,24,40,0.04);" />
         </div>
         <div class="grid grid-cols-4 items-center gap-4 mb-4" style="margin-bottom:16px !important;">
-          <Label for="age" class="text-end">Age</Label>
-          <Input id="age" type="number" class="col-span-3 max-w-[12rem] ml-6" bind:value={age} style="border-radius:0.5rem;margin-left:1.5rem;padding:0.5rem 0.75rem;box-shadow:0 1px 2px rgba(16,24,40,0.04);" />
+          <Label for="age" class="text-end" style="margin-left:1.2rem;">Age</Label>
+          <Input id="age" type="number" class="col-span-3 max-w-[12rem] ml-6" bind:value={age} style="border-radius:0.5rem;margin-left:1rem;padding:0.5rem 0.75rem;box-shadow:0 1px 2px rgba(16,24,40,0.04);" />
         </div>
         <div class="grid grid-cols-4 items-center gap-4 mb-4" style="margin-bottom:16px !important;">
-          <Label for="class" class="text-end">Class</Label>
-          <select id="class" bind:value={className} class="col-span-3 bg-background border-input shadow-sm h-10 min-w-0 max-w-[12rem] ml-6 rounded-lg px-3 py-2 text-base outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-ring/60 focus-visible:ring-2 focus-visible:shadow-md" style="border-radius:0.5rem;margin-left:1.5rem;padding:0.5rem 0.75rem;box-shadow:0 1px 2px rgba(16,24,40,0.04);">
+          <Label for="class" class="text-end" style="margin-left:1.2rem;">Class</Label>
+          <select id="class" bind:value={className} class="col-span-3 bg-background border-input shadow-sm h-10 min-w-0 max-w-[12rem] ml-6 rounded-lg px-3 py-2 text-base outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-ring/60 focus-visible:ring-2 focus-visible:shadow-md" style="border-radius:0.5rem;margin-left:1rem;padding:0.5rem 0.75rem;box-shadow:0 1px 2px rgba(16,24,40,0.04);">
             <option value="">Select</option>
             {#each ['1A','2A','3A','4A','5A','1B','2B','3B'] as opt}
               <option value={opt}>{opt}</option>

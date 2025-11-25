@@ -26,7 +26,13 @@ export const studentColumns: ColumnDef<Student>[] = [
   },
   {
     accessorKey: "firstName",
-    header: "First Name"
+    header: "First Name",
+    // case-insensitive partial match filter
+    filterFn: (row: any, columnId: string, filterValue: any) => {
+      const cell = row.getValue(columnId);
+      if (cell == null) return false;
+      return String(cell).toLowerCase().includes(String(filterValue ?? "").toLowerCase());
+    }
   },
   {
     accessorKey: "lastName",

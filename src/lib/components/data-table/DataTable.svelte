@@ -131,6 +131,43 @@
     }, 0);
   });
 
+  // Diagnostic logs: list available columns once and whenever columns prop changes
+  $effect(() => {
+    try {
+      const cols = (table?.getAllColumns?.() || []).map((c: any) => ({ id: c.id, accessorKey: c.columnDef?.accessorKey }));
+      console.log('DataTable columns available:', cols);
+    } catch (e) {
+      console.log('Error listing table columns', e);
+    }
+  });
+
+  // Diagnostic: log columnFilters and other state changes
+  $effect(() => {
+    try {
+      console.log('DataTable state snapshot:', {
+        pagination,
+        sorting,
+        columnFilters,
+        rowSelection,
+        columnVisibility,
+      });
+    } catch (e) {
+      console.log('Error logging state snapshot', e);
+    }
+  });
+
+  // Diagnostic: whenever columnFilters changes, show filtered row count and an example row
+  $effect(() => {
+    try {
+      console.log('columnFilters changed ->', columnFilters);
+      const rows = table.getRowModel().rows || [];
+      console.log('Rows after filter (count):', rows.length);
+      if (rows.length > 0) console.log('First row preview:', rows[0]?.original);
+    } catch (e) {
+      console.log('Error during columnFilters diagnostic', e);
+    }
+  });
+
   // 🔥 Ensure table updates for columns too
   $effect(() => {
     console.log('DataTable $effect columns change');
@@ -145,6 +182,77 @@
         console.log('DataTable getRowModel error', e);
       }
     }, 0);
+  });
+
+  // Debugging + safe handler for filter input
+  async function handleFilterInput(value: string) {
+    try {
+      let col = table.getColumn("firstName");
+      if (!col) {
+        // try to locate a column with accessorKey 'firstName' from the provided columns
+        const fallback = (columns || []).find((c: any) => c.accessorKey === 'firstName' || c.id === 'firstName');
+        if (fallback) {
+          const id = (fallback.id ?? fallback.accessorKey) as string;
+          col = table.getColumn(id as string);
+        }
+      }
+      // As a last resort, pick the first visible accessor column (skip selection columns)
+      if (!col) {
+        const visible = table.getAllColumns().filter((c) => c.getIsVisible());
+        const firstAccessor = visible.find((c) => !!c.columnDef.accessorKey || !!c.columnDef.accessorFn);
+        if (firstAccessor) col = firstAccessor;
+      }
+      console.log('handleFilterInput called, column found:', !!col, 'value:', value);
+      if (!col) return;
+      // log previous filter value
+      try {
+        console.log('Previous column filterValue:', col.getFilterValue?.());
+      } catch (e) {
+        console.log('Could not read previous column filterValue', e);
+      }
+
+      // Set the filter
+      col.setFilterValue(value);
+
+      // allow the table to update, then log detailed state
+      await tick();
+      try {
+        console.log('After setFilterValue -> table.getState().columnFilters:', table.getState().columnFilters);
+      } catch (e) {
+        console.log('Error reading table.getState().columnFilters', e);
+      }
+
+      try {
+        console.log('Column filter value now:', col.getFilterValue?.());
+      } catch (e) {
+        console.log('Could not read column.getFilterValue after set', e);
+      }
+
+      try {
+        const rows = table.getRowModel().rows || [];
+        console.log('Filtered rows count after setFilterValue:', rows.length);
+        console.log('Filtered rows firstName values:', rows.map((r: any) => r.original?.firstName));
+      } catch (e) {
+        console.log('Error reading row model after filter set', e);
+      }
+    } catch (e) {
+      console.log('handleFilterInput error', e);
+    }
+  }
+
+  // local search binding for the Input component (use $state for runes reactivity)
+  let search = $state<string>((table.getColumn("firstName")?.getFilterValue() as string) ?? "");
+
+  // react to search changes (user typing) and apply filter using $effect (runes mode)
+  $effect(() => {
+    if (typeof search === 'string') {
+      const col = table.getColumn("firstName");
+      const current = col ? (col.getFilterValue?.() as string) ?? "" : "";
+      if (search !== current) {
+        // fire filter handler
+        handleFilterInput(search);
+      }
+    }
   });
 </script>
 
@@ -162,15 +270,8 @@
         <Input
           data-slot="search-input"
           placeholder="Filter Students..."
-          value={
-            (table.getColumn(columns[0].accessorKey)?.getFilterValue() as string) ??
-            ""
-          }
-          on:input={(e) =>
-            table.getColumn(columns[0].accessorKey)?.setFilterValue(
-              e.currentTarget.value
-            )
-          }
+          bind:value={search}
+          on:input={(e) => handleFilterInput((e as CustomEvent).detail?.target?.value ?? search)}
           class="w-full h-8"
         />
       </div>

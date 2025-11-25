@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { HTMLInputAttributes, HTMLInputTypeAttribute } from "svelte/elements";
+	import { createEventDispatcher } from 'svelte';
 	import { cn, type WithElementRef } from "$lib/utils.js";
 
 	type InputType = Exclude<HTMLInputTypeAttribute, "file">;
@@ -18,10 +19,12 @@
 		"data-slot": dataSlot = "input",
 		...restProps
 	}: Props = $props();
+
+const dispatch = createEventDispatcher();
 </script>
 
 {#if type === "file"}
-	<input
+		<input
 		bind:this={ref}
 		data-slot={dataSlot}
 		class={cn(
@@ -48,7 +51,9 @@
 			className
 		)}
 		type={type}
-		bind:value
+			bind:value
+			on:input={(e) => dispatch('input', e)}
+			on:change={(e) => dispatch('change', e)}
 		{...restProps}
 	/>
 {/if}
