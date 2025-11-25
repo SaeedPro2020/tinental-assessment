@@ -151,10 +151,11 @@
       <div class="pl-4">
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>
-            <!-- Render Button directly to ensure classes/variant are applied -->
-            <Button variant="outline" class="rounded-lg h-10 px-3 py-2 bg-background border-input shadow-sm">
-              Columns <ChevronDownIcon class="ml-2 h-4 w-4" />
-            </Button>
+            {#snippet child({ props })}
+              <Button {...props} variant="outline" class="rounded-lg h-10 px-3 py-2 bg-background border-input shadow-sm">
+                Columns <ChevronDownIcon class="ml-2 h-4 w-4" />
+              </Button>
+            {/snippet}
           </DropdownMenu.Trigger>
 
           <DropdownMenu.Content align="end">
