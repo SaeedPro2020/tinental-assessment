@@ -15,8 +15,10 @@
 
 <h1 class="text-2xl font-bold mb-6">Teachers</h1>
 
-<AddTeacherForm on:created={handleCreated} />
+<div class="mb-16">
+  <AddTeacherForm on:created={handleCreated} />
+</div>
 
 {#key teachers.length}
-  <TeachersTable teachers={teachers} />
+  <TeachersTable teachers={teachers} class="mt-16" />
 {/key}

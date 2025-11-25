@@ -18,8 +18,10 @@
 
 <h1 class="text-2xl font-bold mb-6">Students</h1>
 
-<AddStudentForm on:created={handleCreated} />
+<div class="mb-16">
+  <AddStudentForm on:created={handleCreated} />
+</div>
 
 {#key students.length}
-  <StudentsTable students={students} />
+  <StudentsTable students={students} class="mt-16" />
 {/key}
