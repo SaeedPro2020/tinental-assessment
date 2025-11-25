@@ -1,5 +1,6 @@
 <script lang="ts">
   import { invalidate } from '$app/navigation';
+  import { createEventDispatcher } from 'svelte';
   import { Button } from '$lib/components/ui/button';
   import { Input } from '$lib/components/ui/input';
   import { Label } from '$lib/components/ui/label';
@@ -14,6 +15,8 @@
     "History", "Geography", "Computer Science", "English"
   ];
 
+  const dispatch = createEventDispatcher();
+
   async function submitForm() {
     const body = { firstName, lastName, subject };
 
@@ -26,7 +29,15 @@
     });
 
     if (res.ok) {
-      await invalidate('teachers:load');
+      // Invalidate so server-side loaders refresh
+      await invalidate('app:teachers');
+      await invalidate('/teachers');
+      console.log('Invalidated app:teachers and /teachers');
+      const data = await res.json().catch(() => null);
+      if (data) {
+        dispatch('created', data);
+        console.log('Dispatched created event with:', data);
+      }
       firstName = "";
       lastName = "";
       subject = "";

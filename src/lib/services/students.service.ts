@@ -18,9 +18,9 @@ let students: Student[] = [
 ];
 
 export const studentService = {
-  listStudents() {
-    return students;
-  },
+    listStudents() {
+    return [...students];  // return NEW array reference
+    },
 
   createStudent(student: Omit<Student, "id">) {
     const newStudent: Student = {

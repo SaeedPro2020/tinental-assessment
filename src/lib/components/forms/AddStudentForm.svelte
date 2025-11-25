@@ -1,5 +1,6 @@
 <script lang="ts">
   import { invalidate } from '$app/navigation';
+  import { createEventDispatcher } from 'svelte';
   import { Button } from '$lib/components/ui/button';
   import { Input } from '$lib/components/ui/input';
   import { Label } from '$lib/components/ui/label';
@@ -11,6 +12,7 @@
   let className = "";
 
   const classOptions = ["1A", "2A", "3A", "4A", "5A", "1B", "2B", "3B"];
+   const dispatch = createEventDispatcher();
 
   async function submitForm() {
     console.log("SUBMIT FORM CALLED");
@@ -34,13 +36,21 @@
     console.log("Response JSON:", data);
 
     if (res.ok) {
-      await invalidate('students:load');
-
-      firstName = "";
-      lastName = "";
-      age = "";
-      className = "";
+  // Invalidate the load that depends on 'app:students' so the page load re-runs.
+  await invalidate('app:students');
+  // Also invalidate the students route directly to be robust across load types.
+  await invalidate('/students');
+  console.log('Invalidated app:students and /students');
+       // Emit created student for immediate UI updates in parent components
+       if (data) dispatch('created', data);
+  console.log('Dispatched created event with:', data);
+    firstName = "";
+    lastName = "";
+    age = "";
+    className = "";
     }
+
+
   }
 </script>
 

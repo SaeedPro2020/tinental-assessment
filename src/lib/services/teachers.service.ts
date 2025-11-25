@@ -10,9 +10,9 @@ let teachers: Teacher[] = [
 ];
 
 export const teacherService = {
-  listTeachers() {
-    return teachers;
-  },
+    listTeachers() {
+    return [...teachers];
+    },
 
   createTeacher(teacher: Omit<Teacher, "id">) {
     const newTeacher: Teacher = {
