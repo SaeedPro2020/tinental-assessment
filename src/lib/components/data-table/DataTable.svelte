@@ -39,6 +39,9 @@
   let rowSelection = $state<RowSelectionState>({});
   let columnVisibility = $state<VisibilityState>({});
 
+  // local helper map to bind CheckboxItem checked states (allows two-way binding)
+  let colVisibility = $state<Record<string, boolean>>({});
+
   // Create SvelteTable
     const table = createSvelteTable({
     get data() {
@@ -175,6 +178,14 @@
       ...prev,
       columns
     }));
+    // sync local visibility map from table columns
+    try {
+      const map: Record<string, boolean> = {};
+      (table.getAllColumns() || []).forEach((c: any) => (map[c.id] = !!c.getIsVisible()));
+      colVisibility = map;
+    } catch (e) {
+      // ignore
+    }
     setTimeout(() => {
       try {
         console.log('DataTable rows after columns update:', table.getRowModel().rows.length);
@@ -254,6 +265,33 @@
       }
     }
   });
+
+  // Keep the colVisibility map in sync with the table's column visibility state
+  $effect(() => {
+    try {
+      const cols = table.getAllColumns() || [];
+      const map: Record<string, boolean> = {};
+      cols.forEach((c: any) => (map[c.id] = !!c.getIsVisible()));
+      colVisibility = map;
+    } catch (e) {
+      // ignore
+    }
+  });
+
+  // When the local colVisibility map changes, push visibility updates into the table
+  $effect(() => {
+    try {
+      const cols = table.getAllColumns() || [];
+      cols.forEach((c: any) => {
+        const desired = !!colVisibility[c.id];
+        if (typeof c.getIsVisible === 'function' && c.getIsVisible() !== desired) {
+          c.toggleVisibility(desired);
+        }
+      });
+    } catch (e) {
+      // ignore
+    }
+  });
 </script>
 
 
@@ -295,9 +333,10 @@
             {#each table.getAllColumns().filter((c) => c.getCanHide()) as column (column.id)}
               <DropdownMenu.CheckboxItem
                 class="capitalize"
-                on:click={() => column.toggleVisibility(!column.getIsVisible())}
+                bind:checked={colVisibility[column.id]}
               >
-                {column.id}
+                <div style="width:1.3rem;"></div>
+                <span class="ml-2">{column.columnDef?.header ?? column.id}</span>
               </DropdownMenu.CheckboxItem>
             {/each}
           </DropdownMenu.Content>

@@ -51,7 +51,7 @@
   // Debug: log when dialogOpen changes to see if Trigger is toggling it
   $: console.log('dialogOpen state:', dialogOpen);
 </script>
-<h1 class="text-2xl font-bold mb-6">Students</h1>
+<div style="height:5rem;"></div>
 
 <div class="flex justify-center mb-12">
   <Dialog.Root bind:open={dialogOpen}>

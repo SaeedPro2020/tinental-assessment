@@ -14,33 +14,36 @@
 
 		<NavigationMenu>
 			<NavigationMenuList>
-				<NavigationMenuItem>
-					<NavigationMenuLink 
-						href="/" 
-						class={$page.url.pathname === '/' ? 'font-bold text-blue-600' : ''}
-					>
-						Home
-					</NavigationMenuLink>
-				</NavigationMenuItem>
+				<div class="flex items-center gap-x-6">
+					<NavigationMenuItem>
+						<NavigationMenuLink
+							href="/"
+							class={$page.url.pathname === '/' ? 'font-bold text-blue-600' : ''}
+						>
+							Home
+						</NavigationMenuLink>
+					</NavigationMenuItem>
 
-				<NavigationMenuItem>
-					<NavigationMenuLink 
-						href="/students"
-						class={$page.url.pathname.startsWith('/students') ? 'font-bold text-blue-600' : ''}
-					>
-						Students
-					</NavigationMenuLink>
-				</NavigationMenuItem>
+					<NavigationMenuItem>
+						<NavigationMenuLink
+							href="/students"
+							style="margin-left:24px;"
+							class={$page.url.pathname.startsWith('/students') ? 'font-bold text-blue-600' : ''}
+						>
+							Students
+						</NavigationMenuLink>
+					</NavigationMenuItem>
 
-				<NavigationMenuItem>
-					<NavigationMenuLink 
-						href="/teachers"
-						class={$page.url.pathname.startsWith('/teachers') ? 'font-bold text-blue-600' : ''}
-					>
-						Teachers
-					</NavigationMenuLink>
-				</NavigationMenuItem>
-
+					<NavigationMenuItem>
+						<NavigationMenuLink
+							href="/teachers"
+							style="margin-left:24px;"
+							class={$page.url.pathname.startsWith('/teachers') ? 'font-bold text-blue-600' : ''}
+						>
+							Teachers
+						</NavigationMenuLink>
+					</NavigationMenuItem>
+				</div>
 			</NavigationMenuList>
 		</NavigationMenu>
 	</div>
