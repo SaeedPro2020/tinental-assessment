@@ -22,6 +22,7 @@
   import { Button } from "$lib/components/ui/button";
   import { Input } from "$lib/components/ui/input";
   import ChevronDownIcon from "@lucide/svelte/icons/chevron-down";
+  import { tick } from 'svelte';
 
   // ✅ Runes-based props
   const { data, columns, rowActions } = $props<{
@@ -31,11 +32,12 @@
   }>();
 
   // Table state
-  let pagination: PaginationState = { pageIndex: 0, pageSize: 10 };
-  let sorting: SortingState = [];
-  let columnFilters: ColumnFiltersState = [];
-  let rowSelection: RowSelectionState = {};
-  let columnVisibility: VisibilityState = {};
+  // show 5 rows per page by default
+  let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 5 });
+  let sorting = $state<SortingState>([]);
+  let columnFilters = $state<ColumnFiltersState>([]);
+  let rowSelection = $state<RowSelectionState>({});
+  let columnVisibility = $state<VisibilityState>({});
 
   // Create SvelteTable
     const table = createSvelteTable({
@@ -84,6 +86,27 @@
         rowSelection =
         typeof updater === "function" ? updater(rowSelection) : updater,
 
+    // Map any internal table state changes back into our local reactive vars
+    onStateChange: (updater) => {
+      // helper to apply possibly-functional updater
+      const apply = (current: any, upd: any) => (typeof upd === 'function' ? upd(current) : upd ?? current);
+
+      if (typeof updater === 'function') {
+        const next = updater({ pagination, sorting, columnFilters, rowSelection, columnVisibility });
+        pagination = next.pagination ?? pagination;
+        sorting = next.sorting ?? sorting;
+        columnFilters = next.columnFilters ?? columnFilters;
+        rowSelection = next.rowSelection ?? rowSelection;
+        columnVisibility = next.columnVisibility ?? columnVisibility;
+      } else if (updater && typeof updater === 'object') {
+        pagination = updater.pagination ?? pagination;
+        sorting = updater.sorting ?? sorting;
+        columnFilters = updater.columnFilters ?? columnFilters;
+        rowSelection = updater.rowSelection ?? rowSelection;
+        columnVisibility = updater.columnVisibility ?? columnVisibility;
+      }
+    },
+
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -128,11 +151,12 @@
 
 <div class="w-full">
   <!-- Search bar -->
-  <div class="flex items-center py-4 mb-4">
+  <div class="flex items-center py-4 mb-8">
     <div class="mx-auto w-full max-w-[40rem] flex items-center justify-between">
       <!-- Left: search input (aligned with table left edge) -->
       <div class="w-full max-w-[24rem]">
         <Input
+          data-slot="search-input"
           placeholder="Filter Students..."
           value={
             (table.getColumn(columns[0].accessorKey)?.getFilterValue() as string) ??
@@ -143,7 +167,7 @@
               e.currentTarget.value
             )
           }
-          class="w-full mb-2"
+          class="w-full h-8"
         />
       </div>
 
@@ -180,9 +204,11 @@
   </div>
 
   <!-- TABLE -->
+  <!-- TEMP: spacer to force visible vertical gap while debugging -->
+  <div style="height:2rem"></div>
   <div class="mt-8">
   <div class="mx-auto w-full max-w-[40rem]">
-      <Table.Root>
+    <Table.Root>
       <Table.Header>
         {#each table.getHeaderGroups() as headerGroup}
           <Table.Row>
@@ -228,27 +254,71 @@
         {/each}
       </Table.Body>
       </Table.Root>
+
+      <!-- Pagination (moved inside table container and aligned right) -->
+      <div class="flex items-center justify-end space-x-2 pt-4">
+        <!-- Page indicator -->
+        <div class="text-sm text-muted-foreground mr-2">
+          {#key pagination}
+            {@const pageCount = table.getPageCount ? table.getPageCount() : Math.max(1, Math.ceil(((data || []).length || 0) / (pagination.pageSize || 1)))}
+            Page {Math.max(1, (pagination.pageIndex ?? 0) + 1)} of {pageCount}
+          {/key}
+        </div>
+        <button
+          class="inline-flex items-center rounded-md border bg-background px-3 py-1.5 text-sm disabled:opacity-50 disabled:pointer-events-none"
+          onclick={async () => {
+              try {
+                const current = table.getState().pagination?.pageIndex ?? 0;
+                console.log('Previous clicked', { current, canPrev: table.getCanPreviousPage() });
+                // let the table core perform its internal update
+                table.previousPage();
+                // wait a tick so table state has settled and Svelte can update
+                await tick();
+                // sync local pagination from table's state
+                const tbState = table.getState().pagination ?? {};
+                pagination = { ...pagination, pageIndex: tbState.pageIndex ?? pagination.pageIndex };
+                console.log('After previousPage synced pagination', pagination, 'rowsOnPage', table.getRowModel().rows.length);
+              } catch (e) {
+                console.log('Previous click error', e);
+              }
+            }}
+          disabled={!table.getCanPreviousPage()}
+        >
+          Previous
+        </button>
+
+        <button
+          class="inline-flex items-center rounded-md border bg-background px-3 py-1.5 text-sm disabled:opacity-50 disabled:pointer-events-none"
+          onclick={async () => {
+              try {
+                const current = table.getState().pagination?.pageIndex ?? 0;
+                const pageSize = table.getState().pagination?.pageSize ?? pagination.pageSize ?? 5;
+                const totalRows = (data || []).length || 0;
+                const pageCountMethod = typeof table.getPageCount === 'function' ? table.getPageCount() : undefined;
+                const pageCountFallback = Math.max(1, Math.ceil(totalRows / (pageSize || 1)));
+                const pageCount = pageCountMethod ?? pageCountFallback;
+                const attempted = current + 1;
+                const newIndex = Math.min(pageCount - 1, attempted);
+                console.log('Next clicked', { current, attempted, newIndex, canNext: table.getCanNextPage(), pageCountMethod, pageCountFallback, pageCount, pageSize, totalRows });
+
+                // let the table core advance
+                table.nextPage();
+                // wait a tick to allow state to settle
+                await tick();
+                // sync local pagination from table's state
+                const tbState = table.getState().pagination ?? {};
+                pagination = { ...pagination, pageIndex: tbState.pageIndex ?? pagination.pageIndex };
+                console.log('After nextPage synced pagination', pagination, 'rowsOnPage', table.getRowModel().rows.length);
+              } catch (e) {
+                console.log('Next click error', e);
+              }
+            }}
+          disabled={!table.getCanNextPage()}
+        >
+          Next
+        </button>
+      </div>
+
     </div>
-  </div>
-
-  <!-- Pagination -->
-  <div class="flex justify-end space-x-2 pt-4">
-    <Button
-      variant="outline"
-      size="sm"
-      on:click={() => table.previousPage()}
-      disabled={!table.getCanPreviousPage()}
-    >
-      Previous
-    </Button>
-
-    <Button
-      variant="outline"
-      size="sm"
-      on:click={() => table.nextPage()}
-      disabled={!table.getCanNextPage()}
-    >
-      Next
-    </Button>
   </div>
 </div>

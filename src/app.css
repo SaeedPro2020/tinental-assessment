@@ -82,4 +82,12 @@ input:focus, textarea:focus, select:focus, .input:focus {
 	color: inherit !important;
 }
 
+/* Target the specific search input inside the data table to reduce height and padding.
+	 This overrides the more general input debug rules above. */
+input[data-slot="search-input"], input[data-slot="search-input"]:focus {
+	height: 2rem !important; /* much shorter */
+	padding: 0.25rem 0.5rem !important;
+	box-shadow: none !important;
+}
+
 
