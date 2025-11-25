@@ -256,6 +256,8 @@
       </Table.Body>
       </Table.Root>
 
+ <div style="height:2rem;"></div>
+
   <!-- Pagination (moved inside table container and aligned right) -->
   <div class="flex items-center justify-end gap-x-6 pt-4">
   <!-- Page indicator -->
