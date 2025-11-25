@@ -255,17 +255,19 @@
       </Table.Body>
       </Table.Root>
 
-      <!-- Pagination (moved inside table container and aligned right) -->
-      <div class="flex items-center justify-end space-x-2 pt-4">
-        <!-- Page indicator -->
-        <div class="text-sm text-muted-foreground mr-2">
+  <!-- Pagination (moved inside table container and aligned right) -->
+  <div class="flex items-center justify-end gap-x-6 pt-4">
+  <!-- Page indicator -->
+  <div class="text-sm text-muted-foreground">
           {#key pagination}
             {@const pageCount = table.getPageCount ? table.getPageCount() : Math.max(1, Math.ceil(((data || []).length || 0) / (pagination.pageSize || 1)))}
             Page {Math.max(1, (pagination.pageIndex ?? 0) + 1)} of {pageCount}
           {/key}
         </div>
+        <div style="width:2rem;"></div>
         <button
-          class="inline-flex items-center rounded-md border bg-background px-3 py-1.5 text-sm disabled:opacity-50 disabled:pointer-events-none"
+          class="inline-flex items-center rounded-lg bg-white text-black shadow-sm text-sm disabled:opacity-50 disabled:pointer-events-none"
+          style="background:#fff;color:#000;min-height:32px;padding-left:12px;padding-right:12px;border-radius:8px"
           onclick={async () => {
               try {
                 const current = table.getState().pagination?.pageIndex ?? 0;
@@ -288,7 +290,8 @@
         </button>
 
         <button
-          class="inline-flex items-center rounded-md border bg-background px-3 py-1.5 text-sm disabled:opacity-50 disabled:pointer-events-none"
+          class="inline-flex items-center rounded-lg bg-white text-black shadow-sm text-sm disabled:opacity-50 disabled:pointer-events-none"
+          style="background:#fff;color:#000;min-height:32px;padding-left:12px;padding-right:12px;border-radius:8px"
           onclick={async () => {
               try {
                 const current = table.getState().pagination?.pageIndex ?? 0;
