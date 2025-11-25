@@ -10,13 +10,25 @@
 	}: WithElementRef<HTMLTableAttributes> = $props();
 </script>
 
-<div data-slot="table-container" class="relative w-full overflow-x-auto rounded-lg border border-gray-300 overflow-hidden" style="border-color:#D1D5DB !important; border-radius:6px">
-	<table
-		bind:this={ref}
-		data-slot="table"
-		class={cn("w-full caption-bottom text-sm", className)}
-		{...restProps}
-	>
-		{@render children?.()}
-	</table>
+<!--
+	Fixed-size table container:
+	- Uses CSS variables for width/height with sensible fallbacks so consumers can override if needed.
+	- The container is overflow-hidden and the inner wrapper is scrollable so the container dims don't change with content.
+-->
+<div
+	data-slot="table-container"
+	class="relative rounded-lg border border-gray-300"
+	style="width:var(--table-container-width,680px); height:var(--table-container-height,360px); border-color:#D1D5DB !important; border-radius:6px;"
+>
+	<!-- Inner scroll wrapper keeps scrollbars inside the fixed container -->
+	<div class="w-full h-full overflow-auto">
+		<table
+			bind:this={ref}
+			data-slot="table"
+			class={cn("w-full caption-bottom text-sm", className)}
+			{...restProps}
+		>
+			{@render children?.()}
+		</table>
+	</div>
 </div>
