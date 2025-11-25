@@ -242,12 +242,9 @@
               </Table.Cell>
             {/each}
 
-            <!-- Actions Column -->
-            {#if rowActions}
-              <Table.Cell class="text-right">
-                {@html rowActions(row.original)}
-              </Table.Cell>
-            {/if}
+            <!-- Actions Column removed: action HTML will no longer be appended to every row.
+                 If you want per-row actions, add a dedicated column in your columns definition
+                 that renders the action button/snippet. -->
           </Table.Row>
         {:else}
           <Table.Row>

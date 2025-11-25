@@ -18,16 +18,16 @@
 <div
 	data-slot="table-container"
 	class="relative rounded-lg border border-gray-300"
-	style="width:var(--table-container-width,680px); height:var(--table-container-height,360px); border-color:#D1D5DB !important; border-radius:6px;"
+	style="width:var(--table-container-width,680px); height:var(--table-container-height,310px); border-color:#D1D5DB !important; border-radius:6px;"
 >
 	<!-- Inner scroll wrapper keeps scrollbars inside the fixed container -->
 	<div class="w-full h-full overflow-auto">
-		<table
-			bind:this={ref}
-			data-slot="table"
-			class={cn("w-full caption-bottom text-sm", className)}
-			{...restProps}
-		>
+			<table
+				bind:this={ref}
+				data-slot="table"
+				class={cn("w-full caption-bottom text-sm border-collapse", className)}
+				{...restProps}
+			>
 			{@render children?.()}
 		</table>
 	</div>
