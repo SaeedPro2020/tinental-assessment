@@ -150,9 +150,13 @@
 
 
 <div class="w-full">
+  <!-- Fixed-size centered container -->
+  <div class="rounded-lg border border-gray-300 mx-auto p-4 overflow-hidden" style="width:720px; height:420px; border-color:#D1D5DB !important; border-radius:6px;">
+  <!-- Spacer to separate top border from search bar -->
+  <div style="height:3rem;"></div>
   <!-- Search bar -->
-  <div class="flex items-center py-4 mb-8">
-    <div class="mx-auto w-full max-w-[40rem] flex items-center justify-between">
+  <div class="flex items-center py-2 mb-6">
+  <div class="mx-auto w-full max-w-[40rem] flex items-center justify-between">
       <!-- Left: search input (aligned with table left edge) -->
       <div class="w-full max-w-[24rem]">
         <Input
@@ -323,5 +327,6 @@
       </div>
 
     </div>
+  </div>
   </div>
 </div>
