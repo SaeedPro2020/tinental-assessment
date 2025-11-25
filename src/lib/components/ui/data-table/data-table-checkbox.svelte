@@ -19,5 +19,5 @@
   class="h-4 w-4 rounded border border-input bg-background text-primary focus-visible:ring-ring"
   {ariaLabel}
   checked={checked}
-  on:change={handleChange}
+  onchange={handleChange}
 />

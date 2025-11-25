@@ -52,8 +52,8 @@ const dispatch = createEventDispatcher();
 		)}
 		type={type}
 			bind:value
-			on:input={(e) => dispatch('input', e)}
-			on:change={(e) => dispatch('change', e)}
+			oninput={(e) => dispatch('input', e)}
+			onchange={(e) => dispatch('change', e)}
 		{...restProps}
 	/>
 {/if}

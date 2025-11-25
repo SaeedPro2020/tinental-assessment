@@ -271,7 +271,6 @@
           data-slot="search-input"
           placeholder="Filter Students..."
           bind:value={search}
-          on:input={(e) => handleFilterInput((e as CustomEvent).detail?.target?.value ?? search)}
           class="w-full h-8"
         />
       </div>
@@ -292,12 +291,11 @@
             {/snippet}
           </DropdownMenu.Trigger>
 
-          <DropdownMenu.Content align="end">
+          <DropdownMenu.Content align="end" class="bg-white">
             {#each table.getAllColumns().filter((c) => c.getCanHide()) as column (column.id)}
               <DropdownMenu.CheckboxItem
                 class="capitalize"
-                checked={column.getIsVisible()}
-                on:checkedChange={(v) => column.toggleVisibility(!!v)}
+                on:click={() => column.toggleVisibility(!column.getIsVisible())}
               >
                 {column.id}
               </DropdownMenu.CheckboxItem>
