@@ -151,7 +151,7 @@
 
 <div class="w-full">
   <!-- Fixed-size centered container -->
-  <div class="rounded-lg border border-gray-300 mx-auto p-4 overflow-hidden" style="width:720px; height:420px; border-color:#D1D5DB !important; border-radius:6px;">
+  <div class="rounded-lg border border-gray-300 mx-auto p-4 overflow-hidden" style="width:720px; height:520px; border-color:#D1D5DB !important; border-radius:6px;">
   <!-- Spacer to separate top border from search bar -->
   <div style="height:3rem;"></div>
   <!-- Search bar -->

@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Student } from "$lib/types/student";
   import DataTable from "$lib/components/data-table/DataTable.svelte";
+  import { studentColumns } from "$lib/components/tables/students-columns";
   export let students: Student[] = [];
 
   // Return inline HTML for action menu
@@ -15,16 +16,8 @@
         </button>
     `;
     }
-
-
-  const columns = [
-    { header: "First Name", accessorKey: "firstName" },
-    { header: "Last Name", accessorKey: "lastName" },
-    { header: "Age", accessorKey: "age" },
-    { header: "Class", accessorKey: "class" }
-  ];
 </script>
 
 <div {...$$restProps}>
-  <DataTable data={students} {columns} {rowActions} />
+  <DataTable data={students} columns={studentColumns} {rowActions} />
 </div>
