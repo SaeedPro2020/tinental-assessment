@@ -133,7 +133,7 @@
       <!-- Left: search input (aligned with table left edge) -->
       <div class="w-full max-w-[24rem]">
         <Input
-          placeholder="Search..."
+          placeholder="Filter Students..."
           value={
             (table.getColumn(columns[0].accessorKey)?.getFilterValue() as string) ??
             ""
