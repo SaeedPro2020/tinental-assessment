@@ -129,47 +129,54 @@
 <div class="w-full">
   <!-- Search bar -->
   <div class="flex items-center py-4 mb-4">
-    <Input
-      placeholder="Search..."
-      value={
-        (table.getColumn(columns[0].accessorKey)?.getFilterValue() as string) ??
-        ""
-      }
-      on:input={(e) =>
-        table.getColumn(columns[0].accessorKey)?.setFilterValue(
-          e.currentTarget.value
-        )
-      }
-      class="max-w-xs mb-2"
-    />
+    <div class="mx-auto w-full max-w-[40rem] flex items-center justify-between">
+      <!-- Left: search input (aligned with table left edge) -->
+      <div class="w-full max-w-[24rem]">
+        <Input
+          placeholder="Search..."
+          value={
+            (table.getColumn(columns[0].accessorKey)?.getFilterValue() as string) ??
+            ""
+          }
+          on:input={(e) =>
+            table.getColumn(columns[0].accessorKey)?.setFilterValue(
+              e.currentTarget.value
+            )
+          }
+          class="w-full mb-2"
+        />
+      </div>
 
-    <!-- Column visibility dropdown -->
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger>
-        {#snippet child({ props })}
-          <Button {...props} variant="outline" class="ml-auto">
-            Columns <ChevronDownIcon class="ml-2 h-4 w-4" />
-          </Button>
-        {/snippet}
-      </DropdownMenu.Trigger>
+      <!-- Right: Columns dropdown -->
+      <div class="pl-4">
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger>
+            <!-- Render Button directly to ensure classes/variant are applied -->
+            <Button variant="outline" class="rounded-lg h-10 px-3 py-2 bg-background border-input shadow-sm">
+              Columns <ChevronDownIcon class="ml-2 h-4 w-4" />
+            </Button>
+          </DropdownMenu.Trigger>
 
-      <DropdownMenu.Content align="end">
-        {#each table.getAllColumns().filter((c) => c.getCanHide()) as column (column.id)}
-          <DropdownMenu.CheckboxItem
-            class="capitalize"
-            checked={column.getIsVisible()}
-            on:checkedChange={(v) => column.toggleVisibility(!!v)}
-          >
-            {column.id}
-          </DropdownMenu.CheckboxItem>
-        {/each}
-      </DropdownMenu.Content>
-    </DropdownMenu.Root>
+          <DropdownMenu.Content align="end">
+            {#each table.getAllColumns().filter((c) => c.getCanHide()) as column (column.id)}
+              <DropdownMenu.CheckboxItem
+                class="capitalize"
+                checked={column.getIsVisible()}
+                on:checkedChange={(v) => column.toggleVisibility(!!v)}
+              >
+                {column.id}
+              </DropdownMenu.CheckboxItem>
+            {/each}
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>
+      </div>
+    </div>
   </div>
 
   <!-- TABLE -->
-  <div class="rounded-md border mt-8">
-    <Table.Root>
+  <div class="mt-8">
+  <div class="mx-auto w-full max-w-[40rem]">
+      <Table.Root>
       <Table.Header>
         {#each table.getHeaderGroups() as headerGroup}
           <Table.Row>
@@ -187,7 +194,7 @@
         {/each}
       </Table.Header>
 
-      <Table.Body>
+  <Table.Body>
         {#each table.getRowModel().rows as row}
           <Table.Row>
             {#each row.getVisibleCells() as cell}
@@ -214,7 +221,8 @@
           </Table.Row>
         {/each}
       </Table.Body>
-    </Table.Root>
+      </Table.Root>
+    </div>
   </div>
 
   <!-- Pagination -->
