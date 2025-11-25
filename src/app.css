@@ -38,3 +38,27 @@ html {
 @tailwind utilities;
 
 
+
+/* Debug / high-specificity overrides to ensure inputs match the screenshot
+	 These are intentionally specific and use !important so they show up immediately
+	 while you confirm the visual; we'll remove or convert these into Tailwind
+	 utilities once the dev-server and Tailwind rebuild show the expected result. */
+input[data-slot="input"],
+input, textarea, select,
+.input {
+	border-radius: 0.5rem !important; /* rounded-lg */
+	height: 2.5rem !important; /* h-10 */
+	padding: 0.5rem 0.75rem !important; /* px-3 py-2 */
+	box-shadow: 0 1px 2px rgba(16,24,40,0.04) !important; /* subtle base shadow */
+	background-color: hsl(var(--background)) !important;
+	border: 1px solid hsl(var(--border)) !important;
+}
+
+input[data-slot="input"]:focus,
+input:focus, textarea:focus, select:focus, .input:focus {
+	outline: none !important;
+	box-shadow: 0 8px 24px rgba(16,24,40,0.08) !important, 0 0 0 4px rgba(99,102,241,0.06) !important;
+	border-color: hsl(var(--ring)) !important;
+}
+
+

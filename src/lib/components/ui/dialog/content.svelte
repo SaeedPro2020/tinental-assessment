@@ -88,8 +88,7 @@
     role="presentation"
     style="position:fixed;top:0;right:0;bottom:0;left:0;display:flex;align-items:center;justify-content:center;z-index:9999;"
   >
-    <!-- DEBUG: visible badge so user can tell the dialog mounted even if hidden by CSS -->
-    <div style="position:fixed;left:12px;top:12px;z-index:2147483647;background:#e11d48;color:white;padding:6px;border-radius:4px;font-weight:600">DIALOG OPEN</div>
+  <!-- debug badge removed -->
     <!-- Backdrop: make interactive for accessibility -->
     <div
       class="fixed inset-0 bg-black/40"
@@ -105,11 +104,11 @@
       <div class="mx-auto">
         <!-- Visible panel wrapper so dialog looks like a modal even without Tailwind tokens -->
         <div
-          class="bg-white rounded-lg p-6 shadow-lg w-full max-w-lg mx-auto"
+          class="bg-white rounded-lg p-4 shadow-lg w-full max-w-lg mx-auto"
           on:keydown={handleKeyDown}
           tabindex="-1"
           aria-hidden={open ? 'false' : 'true'}
-          style="background:white;border-radius:8px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,0.15);width:100%;max-width:720px;margin:0 auto;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:10000;"
+          style="background:white;border-radius:8px;padding:12px 12px 16px 12px;box-shadow:0 10px 30px rgba(0,0,0,0.15);width:100%;max-width:720px;margin:0 auto;position:fixed;left:calc(50% + 12px);top:50%;transform:translate(-50%,-50%);z-index:10000;"
         >
           <slot />
         </div>

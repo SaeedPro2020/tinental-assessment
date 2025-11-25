@@ -42,6 +42,9 @@
 </script>
 
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
+
 	let {
 		class: className,
 		variant = "default",
@@ -53,6 +56,13 @@
 		children,
 		...restProps
 	}: ButtonProps = $props();
+
+	function forward(e: Event) {
+		// re-dispatch the event from the component so parent `on:click` works
+		// include the original event as detail for handlers that need it
+		// Note: re-dispatching the native Event object preserves useful properties
+		dispatch(e.type, e);
+	}
 </script>
 
 {#if href}
@@ -64,6 +74,11 @@
 		aria-disabled={disabled}
 		role={disabled ? "link" : undefined}
 		tabindex={disabled ? -1 : undefined}
+		onclick={forward}
+		onkeydown={forward}
+		onkeyup={forward}
+		onfocus={forward}
+		onblur={forward}
 		{...restProps}
 	>
 		{@render children?.()}
@@ -73,8 +88,13 @@
 		bind:this={ref}
 		data-slot="button"
 		class={cn(buttonVariants({ variant, size }), className)}
-	type={type}
-	disabled={disabled}
+		type={type}
+		disabled={disabled}
+		onclick={forward}
+		onkeydown={forward}
+		onkeyup={forward}
+		onfocus={forward}
+		onblur={forward}
 		{...restProps}
 	>
 		{@render children?.()}

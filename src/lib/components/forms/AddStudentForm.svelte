@@ -76,11 +76,13 @@
 
     <div class="space-y-2">
       <Label>Class</Label>
-      <select
-        bind:value={className}
-        class="border rounded-md p-2 w-full"
-        required
-      >
+        <select
+          bind:value={className}
+          id="class"
+          name="class"
+          class="block w-full bg-background border-input shadow-sm h-10 min-w-0 rounded-lg px-3 py-2 text-base outline-none transition-[color,box-shadow] focus-visible:border-ring focus-visible:ring-ring/60 focus-visible:ring-2 focus-visible:shadow-md"
+          required
+        >
         <option value="">Select</option>
         {#each classOptions as opt}
           <option value={opt}>{opt}</option>
