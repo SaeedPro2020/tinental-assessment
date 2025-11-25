@@ -152,9 +152,14 @@
         <DropdownMenu.Root>
           <DropdownMenu.Trigger>
             {#snippet child({ props })}
-              <Button {...props} variant="outline" class="rounded-lg h-10 px-3 py-2 bg-background border-input shadow-sm">
-                Columns <ChevronDownIcon class="ml-2 h-4 w-4" />
-              </Button>
+              <button
+                {...props}
+                type="button"
+                class="inline-flex items-center rounded-lg h-10 px-3 py-2 bg-background border border-input text-black shadow-sm"
+              >
+                <span class="leading-none">Columns</span>
+                <ChevronDownIcon class="ml-2 h-4 w-4" />
+              </button>
             {/snippet}
           </DropdownMenu.Trigger>
 

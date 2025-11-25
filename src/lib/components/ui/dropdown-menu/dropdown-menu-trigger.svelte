@@ -4,4 +4,6 @@
 	let { ref = $bindable(null), ...restProps }: DropdownMenuPrimitive.TriggerProps = $props();
 </script>
 
-<DropdownMenuPrimitive.Trigger bind:ref data-slot="dropdown-menu-trigger" {...restProps} />
+<DropdownMenuPrimitive.Trigger bind:ref data-slot="dropdown-menu-trigger" {...restProps}>
+	<slot />
+</DropdownMenuPrimitive.Trigger>
