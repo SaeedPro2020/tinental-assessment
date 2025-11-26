@@ -231,6 +231,19 @@ All data is stored in simple arrays inside the repository layer:
 
 <br />
 
+### ⏳ If I Had More Time (Future Roadmap)
+
+- Add edit/delete support to CRUD components
+- Add input validation schemas (Zod)
+- Add unit tests for CRUD components
+- Add optimistic UI updates
+- Add dark/light theme toggle
+- Add sorting/filtering on data table
+- Add persistence layer (PostgreSQL) behind the repository
+- Add authentication (Lucia)
+
+<br />
+
 ### 🏁 Conclusion
 
 This project demonstrates:
