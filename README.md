@@ -1,56 +1,53 @@
 ## 🎓 School Registry App (SvelteKit + TailwindCSS + TypeScript)
 
-A small full-stack SvelteKit application developed as part of the Project Full Stack Developer Technical Assessment.
+A clean, modern full-stack SvelteKit application built for the
+Full Stack Developer Technical Assessment.
+Assessment reference:
 
 
-The app allows managing a simple school registry, including:
+### This project demonstrates:
+- Scalable front-end architecture
+- Type-safe CRUD modules
+- In-memory mock backend (required by assessment)
+- Reusable UI components
+- Professional engineering practices
+- Modern SvelteKit patterns
 
+
+### The app allows managing a simple school registry, including:
 - Students
-
 - Teachers
 
-It features:
+
+### It features:
 
 - Clean UI with TailwindCSS
-
 - In-memory data storage (no database)
-
 - REST-style API endpoints using SvelteKit +server.ts
-
 - Fully typed TypeScript services and repositories
-
 - Professional multi-layer architecture
-
 - Modern SvelteKit file-based routing
-
 - Server load functions and client actions
-
 - Reusable UI components
-
 - End-to-end functional pages
 
 
 ### 🚀 Live Features
-✔ Students
 
+👩‍🎓 Students
 - View student list
-
-- Add new student (with validation)
-
+- Add new student (dialog form)
+- Validation & type safety
 - Real-time refresh after creation
 
-✔ Teachers
-
+👨‍🏫 Teachers
 - View teacher list
-
 - Add new teacher (with validation)
-
+- Same reusable CRUD UI
 - Real-time refresh
 
 ✔ Navigation
-
 - Clean navbar
-
 - Home → Students / Teachers
 
 
@@ -60,7 +57,7 @@ This project intentionally follows a realistic, scalable backend-frontend archit
 
 Svelte UI (pages + components)
         ↓
-+page.server.ts (server load)
+SvelteKit Server Load Functions (+page.server.ts)
         ↓
 API Endpoints (+server.ts)
         ↓
@@ -73,29 +70,27 @@ Repositories (mock in-memory data)
 
 Although the test requires “mock in-memory services”, implementing the app with proper layers demonstrates:
 
+- It clearly separates UI, business logic, and data
 - Scalable backend design
-
 - Separation of concerns
-
 - Clean TypeScript domain modeling
-
-- Real-world full-stack thinking
-
+- It keeps the project maintainable and scalable
 - Project-style production coding
 
 
 ### 🧩 Tech Stack
 
-| Layer           | Technology                       |
-| --------------- | -------------------------------- |
-| Framework       | **SvelteKit**                    |
-| Styling         | **TailwindCSS** (+ Forms plugin) |
-| Languages       | **TypeScript**, HTML, CSS        |
-| Testing         | Vitest (unit + component)        |
-| Package Manager | npm                              |
-| Dev Tools       | ESLint, Prettier                 |
-| Data Layer      | Mock in-memory repositories      |
-
+| Layer      | Technology                                    |
+| ---------- | --------------------------------------------- |
+| Framework  | **SvelteKit**                                 |
+| Styling    | **TailwindCSS** + shadcn-svelte               |
+| Language   | **TypeScript**                                |
+| Testing    | **Vitest**                                    |
+| Dev Tools  | ESLint, Prettier                              |
+| Data Layer | In-memory repositories (assessment-compliant) |
+| Build      | Vite                                          |
+| Deployment | Dockerfile (multi-stage)                      |
+| CI/CD      | GitHub Actions                                |
 
 
 ### 📂 Project Structure
@@ -103,30 +98,28 @@ Although the test requires “mock in-memory services”, implementing the app w
 src/
  ├─ lib/
  │   ├─ components/
- │   │   ├─ forms/
- │   │   ├─ tables/
- │   │   └─ ui/
- │   ├─ repositories/      ← mock in-memory data
- │   ├─ services/          ← validation + business logic
- │   ├─ types/
- │   └─ utils/
+ │   │   ├─ crud/          # Reusable CRUD system
+ │   │   └─ ui/            # shadcn-svelte wrapped components
+ │   ├─ repositories/      # In-memory mock storage
+ │   ├─ services/          # Business logic + validation
+ │   ├─ types/             # Domain types
  ├─ routes/
- │   ├─ +layout.svelte     ← navbar + global layout
- │   ├─ +page.svelte       ← home
+ │   ├─ +layout.svelte     # Navbar + global layout
+ │   ├─ +page.svelte       # Home
  │   ├─ students/
- │   │   ├─ +page.svelte
+ │   │   ├─ +page.svelte   # CRUD config for Students
  │   │   ├─ +page.server.ts
- │   │   └─ +server.ts     ← API: GET/POST students
+ │   │   └─ +server.ts     # API handlers (mock)
  │   └─ teachers/
  │       ├─ +page.svelte
  │       ├─ +page.server.ts
- │       └─ +server.ts     ← API: GET/POST teachers
+ │       └─ +server.ts     # API handlers (mock)
 
 
 ### 🛠 Setup Instructions
 
 #### 1. Clone repository
-git clone https://github.com/<your username>/Project-assessment.git
+git clone https://github.com/SaeedPro2020/tinental-assessment.git
 cd Project-assessment
 
 
@@ -141,14 +134,34 @@ App will be available at:
 👉 http://localhost:5173/
 
 
+### 🐳 Docker Support
+
+This project includes a production-ready Dockerfile:
+
+docker build -t school-registry .
+docker run -p 3000:3000 school-registry
+
+
+### 🔄 CI/CD (GitHub Actions)
+
+Pipeline includes:
+- Install & cache dependencies
+- Lint
+- Test
+- Build
+- (Optional) Docker build
+
 ### 🧪 Testing (Vitest)
 
-To run tests:
+Tests cover:
+
+- Repository in-memory behavior
+- Service logic
+- Component rendering (CrudForm, CrudTable)
+
+Run tests:
 npm run test
 
-Vitest is configured for:
-- Unit testing (repositories + services)
-- Component testing (forms + tables)
 
 ### 📦 Build for Production
 npm run build
@@ -221,4 +234,95 @@ This project demonstrates:
 - Solid backend architecture principles
 - Realistic scalable structure
 - Production-ready UI with Tailwind
-- Professional engineering practices
+- Modern UI with reusable components
+
+
+### Architecture Diagram
+
+                          ┌────────────────────--───────────┐
+                          │          Browser UI             │
+                          │  (Svelte Components + Tailwind) │
+                          └──────────────┬──────────────────┘
+                                         │
+                                         ▼
+                         ┌─────────────────────────────────────┐
+                         │          Pages Layer                │
+                         │ ─────────────────────────────────── │
+                         │  /students/+page.svelte             │
+                         │  /teachers/+page.svelte             │
+                         │                                     │
+                         │  • Defines column config            │
+                         │  • Defines form field config        │
+                         │  • Calls `onCreate()` actions       │
+                         │  • Passes data to CrudPage          │
+                         └──────────────────┬──────────────────┘
+                                            │
+                                            ▼
+                         ┌─────────────────────────────────────┐
+                         │         CRUD Component Layer        │
+                         │ ─────────────────────────────────── │
+                         │  CrudPage.svelte                    │
+                         │  CrudTable.svelte                   │
+                         │  CrudForm.svelte                    │
+                         │                                     │
+                         │  • Renders generic CRUD UI          │
+                         │  • Reusable across entities         │
+                         │  • Uses shadcn-svelte components    │
+                         └──────────────────┬──────────────────┘
+                                            │
+                                            ▼
+                         ┌─────────────────────────────────────┐
+                         │      SvelteKit Server Load Layer    │
+                         │ ─────────────────────────────────── │
+                         │  /students/+page.server.ts          │
+                         │  /teachers/+page.server.ts          │
+                         │                                     │
+                         │  • Fetches data via internal API    │
+                         │  • Injects data into the page       │
+                         │  • Handles invalidation             │
+                         └──────────────────┬──────────────────┘
+                                            │
+                                            ▼
+                         ┌─────────────────────────────────────┐
+                         │       API Endpoint Layer            │
+                         │ ─────────────────────────────────── │
+                         │  /students/+server.ts               │
+                         │  /teachers/+server.ts               │
+                         │                                     │
+                         │  • GET students/teachers            │
+                         │  • POST new entries                 │
+                         │  • Calls service layer              │
+                         └──────────────────┬──────────────────┘
+                                            │
+                                            ▼
+                          ┌───────────────────-───────────────┐
+                          │          Service Layer            │
+                          │ ───────────────────────────────── │
+                          │  students.service.ts              │
+                          │  teachers.service.ts              │
+                          │                                   │
+                          │  • Business logic                 │
+                          │  • Validation                     │
+                          │  • Delegates to repository        │
+                          └──────────────────┬────────────────┘
+                                             │
+                                             ▼
+                          ┌─────────────────────-─────────────┐
+                          │        Repository Layer           │
+                          │ ───────────────────────────────── │
+                          │  students.repository.ts           │
+                          │  teachers.repository.ts           │
+                          │                                   │
+                          │  • In-memory collections          │
+                          │  • CRUD operations                │
+                          │  • No database                    │
+                          └──────────────────┬────────────────┘
+                                             │
+                                             ▼
+                          ┌──────────────────────────────────┐
+                          │           Mock Data              │
+                          │ ─────────────────────────────────│
+                          │  • Arrays held in memory         │
+                          │  • Lost on restart               │
+                          │  • Fully assessment-compliant    │
+                          └──────────────────────────────────┘
