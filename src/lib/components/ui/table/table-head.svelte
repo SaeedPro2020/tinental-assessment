@@ -14,7 +14,7 @@
 	bind:this={ref}
 	data-slot="table-head"
 	class={cn(
-		"text-foreground h-10 whitespace-nowrap bg-clip-padding px-2 text-start align-middle font-medium [&:has([role=checkbox])]:pe-0 border-b",
+		"text-foreground h-10 whitespace-nowrap bg-clip-padding px-2 text-center align-middle font-medium [&:has([role=checkbox])]:pe-0 border-b",
 		className
 	)}
 	style="border-color: hsl(var(--border));"
