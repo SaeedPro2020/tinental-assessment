@@ -10,7 +10,7 @@
 <nav class="border-b bg-card text-card-foreground" style="border-color: hsl(var(--border));">
 	<div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
 		
-	<div class="text-xl font-semibold">School Registry</div>
+	<div class="text-xl font-semibold" style="margin-left:24px;">School Registry</div>
 
 		<NavigationMenu>
 			<NavigationMenuList>
@@ -37,7 +37,7 @@
 					<NavigationMenuItem>
 						<NavigationMenuLink
 							href="/teachers"
-							style="margin-left:24px;"
+							style="margin-left:24px; margin-right: 16px"
 							class={$page.url.pathname.startsWith('/teachers') ? 'font-bold text-blue-600' : ''}
 						>
 							Teachers
