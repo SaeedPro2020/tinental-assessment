@@ -19,8 +19,8 @@
   }
 </script>
 
-<div class="space-y-8">
-  <div class="flex items-center justify-between">
+<div class="space-y-6">
+  <div class="flex items-center justify-between" class:mb-6={addButtonAlign === 'right'}>
     <h1 class="text-2xl font-semibold">{title}</h1>
     {#if addButtonAlign === 'right'}
       <CrudForm {formFields} addButtonLabel={addButtonLabel} {onCreate} on:created={handleCreated} />
@@ -28,10 +28,12 @@
   </div>
 
   {#if addButtonAlign === 'center'}
-    <div class="flex justify-center mt-6">
+    <div class="flex justify-center mb-6">
       <CrudForm {formFields} addButtonLabel={addButtonLabel} {onCreate} on:created={handleCreated} />
     </div>
   {/if}
+
+  <div style="height:5rem;"></div>
 
   <CrudTable {columns} {data} />
 </div>
