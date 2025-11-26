@@ -95,25 +95,25 @@ Although the test requires “mock in-memory services”, implementing the app w
 
 ### 📂 Project Structure
 
-src/
- ├─ lib/
- │   ├─ components/
- │   │   ├─ crud/          # Reusable CRUD system
- │   │   └─ ui/            # shadcn-svelte wrapped components
- │   ├─ repositories/      # In-memory mock storage
- │   ├─ services/          # Business logic + validation
- │   ├─ types/             # Domain types
- ├─ routes/
- │   ├─ +layout.svelte     # Navbar + global layout
- │   ├─ +page.svelte       # Home
- │   ├─ students/
- │   │   ├─ +page.svelte   # CRUD config for Students
- │   │   ├─ +page.server.ts
- │   │   └─ +server.ts     # API handlers (mock)
- │   └─ teachers/
- │       ├─ +page.svelte
- │       ├─ +page.server.ts
- │       └─ +server.ts     # API handlers (mock)
+        src/
+         ├─ lib/
+         │   ├─ components/
+         │   │   ├─ crud/          # Reusable CRUD system
+         │   │   └─ ui/            # shadcn-svelte wrapped components
+         │   ├─ repositories/      # In-memory mock storage
+         │   ├─ services/          # Business logic + validation
+         │   ├─ types/             # Domain types
+         ├─ routes/
+         │   ├─ +layout.svelte     # Navbar + global layout
+         │   ├─ +page.svelte       # Home
+         │   ├─ students/
+         │   │   ├─ +page.svelte   # CRUD config for Students
+         │   │   ├─ +page.server.ts
+         │   │   └─ +server.ts     # API handlers (mock)
+         │   └─ teachers/
+         │       ├─ +page.svelte
+         │       ├─ +page.server.ts
+         │       └─ +server.ts     # API handlers (mock)
 
 
 ### 🛠 Setup Instructions
