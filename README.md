@@ -1,6 +1,6 @@
 ## 🎓 School Registry App (SvelteKit + TailwindCSS + TypeScript)
 
-A small full-stack SvelteKit application developed as part of the Tinental Full Stack Developer Technical Assessment.
+A small full-stack SvelteKit application developed as part of the Project Full Stack Developer Technical Assessment.
 
 
 The app allows managing a simple school registry, including:
@@ -81,7 +81,7 @@ Although the test requires “mock in-memory services”, implementing the app w
 
 - Real-world full-stack thinking
 
-- Tinental-style production coding
+- Project-style production coding
 
 
 ### 🧩 Tech Stack
@@ -126,8 +126,8 @@ src/
 ### 🛠 Setup Instructions
 
 #### 1. Clone repository
-git clone https://github.com/<your username>/tinental-assessment.git
-cd tinental-assessment
+git clone https://github.com/<your username>/Project-assessment.git
+cd Project-assessment
 
 
 #### 2. Install dependencies
