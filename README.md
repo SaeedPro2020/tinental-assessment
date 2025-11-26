@@ -31,6 +31,7 @@ Assessment reference:
 - Reusable UI components
 - End-to-end functional pages
 
+<br />
 
 ### 🚀 Live Features
 
@@ -50,20 +51,21 @@ Assessment reference:
 - Clean navbar
 - Home → Students / Teachers
 
+<br />
 
-### 🏗 Architecture Overview
+###  🏗 Architecture Overview
 
 This project intentionally follows a realistic, scalable backend-frontend architecture — even though no real database is used — to demonstrate full-stack best practices.
 
-Svelte UI (pages + components)
-        ↓
-SvelteKit Server Load Functions (+page.server.ts)
-        ↓
-API Endpoints (+server.ts)
-        ↓
-Services (validation + business logic)
-        ↓
-Repositories (mock in-memory data)
+        Svelte UI (pages + components)
+                ↓
+        SvelteKit Server Load Functions (+page.server.ts)
+                ↓
+        API Endpoints (+server.ts)
+                ↓
+        Services (validation + business logic)
+                ↓
+        Repositories (mock in-memory data)
 
 
 ### Why this architecture?
@@ -77,6 +79,7 @@ Although the test requires “mock in-memory services”, implementing the app w
 - It keeps the project maintainable and scalable
 - Project-style production coding
 
+<br />
 
 ### 🧩 Tech Stack
 
@@ -92,6 +95,7 @@ Although the test requires “mock in-memory services”, implementing the app w
 | Deployment | Dockerfile (multi-stage)                      |
 | CI/CD      | GitHub Actions                                |
 
+<br />
 
 ### 📂 Project Structure
 
@@ -116,23 +120,26 @@ Although the test requires “mock in-memory services”, implementing the app w
          │       └─ +server.ts     # API handlers (mock)
 
 
+<br />
+
 ### 🛠 Setup Instructions
 
 #### 1. Clone repository
-git clone https://github.com/SaeedPro2020/tinental-assessment.git
-cd Project-assessment
+- git clone https://github.com/SaeedPro2020/tinental-assessment.git
+- cd Project-assessment
 
 
 #### 2. Install dependencies
 npm install
 
 #### 3. Start Dev Server
-npm run dev
+- npm run dev
 
 App will be available at:
 
 👉 http://localhost:5173/
 
+<br />
 
 ### 🐳 Docker Support
 
@@ -141,6 +148,7 @@ This project includes a production-ready Dockerfile:
 docker build -t school-registry .
 docker run -p 3000:3000 school-registry
 
+<br />
 
 ### 🔄 CI/CD (GitHub Actions)
 
@@ -160,41 +168,49 @@ Tests cover:
 - Component rendering (CrudForm, CrudTable)
 
 Run tests:
-npm run test
+- npm run test
 
+<br />
 
 ### 📦 Build for Production
-npm run build
-npm run preview
+- npm run build
+- npm run preview
+
+<br />
 
 ### 🧱 Data Model
 Student
-interface Student {
-  id: string;
-  firstName: string;
-  lastName: string;
-  age: number;
-  class: string;
-}
 
+        interface Student {
+          id: string;
+          firstName: string;
+          lastName: string;
+          age: number;
+          class: string;
+        }
+        
 Teacher
-interface Teacher {
-  id: string;
-  firstName: string;
-  lastName: string;
-  subject: string;
-}
+
+        interface Teacher {
+          id: string;
+          firstName: string;
+          lastName: string;
+          subject: string;
+        }
+
+<br />
 
 ### 🗂 Mock In-Memory Database
 
 All data is stored in simple arrays inside the repository layer:
 
-src/lib/repositories/students.repository.ts
-src/lib/repositories/teachers.repository.ts
+- src/lib/repositories/students.repository.ts
+- src/lib/repositories/teachers.repository.ts
 
 
 “Data should be handled through mock in-memory services.”
 
+<br />
 
 ### 🧠 Design Considerations
 
@@ -205,25 +221,15 @@ src/lib/repositories/teachers.repository.ts
 - Separation of UI and business concerns
 - Reusable Tailwind input components
 
-
-### 🎥 Demo Video (YouTube)
-
-A full walkthrough of the solution including:
-
-- Architecture explanation
-- Code structure
-- End-to-end demonstration
-- Design decisions
-
-👉 [YouTube link here]
-
+<br />
 
 ### 👤 Author
-Saeed Farkhondeh
-Full Stack Developer
-Email: saeedfa20201@gmail.com
-LinkedIn: https://www.linkedin.com/in/saeed-farkhondeh-575924172/
+- Saeed Farkhondeh
+- Full Stack Developer
+- Email: saeedfa20201@gmail.com
+- LinkedIn: https://www.linkedin.com/in/saeed-farkhondeh-575924172/
 
+<br />
 
 ### 🏁 Conclusion
 
@@ -236,6 +242,7 @@ This project demonstrates:
 - Production-ready UI with Tailwind
 - Modern UI with reusable components
 
+<br />
 
 ### Architecture Diagram
 
