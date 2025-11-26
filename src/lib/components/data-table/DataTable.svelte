@@ -321,7 +321,7 @@
               <button
                 {...props}
                 type="button"
-                class="inline-flex items-center rounded-lg h-10 px-3 py-2 bg-background border border-input text-black shadow-sm"
+                class="inline-flex items-center rounded-lg h-10 px-3 py-2 bg-card border border-input text-card-foreground shadow-sm"
               >
                 <span class="leading-none">Columns</span>
                 <ChevronDownIcon class="ml-2 h-4 w-4" />
@@ -329,7 +329,7 @@
             {/snippet}
           </DropdownMenu.Trigger>
 
-          <DropdownMenu.Content align="end" class="bg-white">
+          <DropdownMenu.Content align="end" class="bg-card text-card-foreground">
             {#each table.getAllColumns().filter((c) => c.getCanHide()) as column (column.id)}
               <DropdownMenu.CheckboxItem
                 class="capitalize"
@@ -407,8 +407,8 @@
         </div>
         <div style="width:2rem;"></div>
         <button
-          class="inline-flex items-center rounded-lg bg-white text-black shadow-sm text-sm disabled:opacity-50 disabled:pointer-events-none"
-          style="background:#fff;color:#000;min-height:32px;padding-left:12px;padding-right:12px;border-radius:8px"
+          class="inline-flex items-center rounded-lg bg-card text-card-foreground shadow-sm text-sm disabled:opacity-50 disabled:pointer-events-none"
+                    style="background:#fff;color:#000;min-height:32px;padding-left:12px;padding-right:12px;border-radius:8px"
           onclick={async () => {
               try {
                 const current = table.getState().pagination?.pageIndex ?? 0;
@@ -431,7 +431,7 @@
         </button>
 
         <button
-          class="inline-flex items-center rounded-lg bg-white text-black shadow-sm text-sm disabled:opacity-50 disabled:pointer-events-none"
+          class="inline-flex items-center rounded-lg bg-card text-card-foreground shadow-sm text-sm disabled:opacity-50 disabled:pointer-events-none"
           style="background:#fff;color:#000;min-height:32px;padding-left:12px;padding-right:12px;border-radius:8px"
           onclick={async () => {
               try {

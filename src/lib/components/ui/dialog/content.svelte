@@ -104,11 +104,11 @@
       <div class="mx-auto">
         <!-- Visible panel wrapper so dialog looks like a modal even without Tailwind tokens -->
         <div
-          class="bg-white rounded-lg p-4 shadow-lg w-full max-w-lg mx-auto"
+          class="bg-card rounded-lg p-4 shadow-lg w-full max-w-lg mx-auto"
           on:keydown={handleKeyDown}
           tabindex="-1"
           aria-hidden={open ? 'false' : 'true'}
-          style="background:white;border-radius:8px;padding:12px 12px 16px 12px;box-shadow:0 10px 30px rgba(0,0,0,0.15);width:100%;max-width:720px;margin:0 auto;position:fixed;left:calc(50% + 12px);top:50%;transform:translate(-50%,-50%);z-index:10000;"
+          style="background: hsl(var(--card)); color: hsl(var(--card-foreground)); border-radius:8px;padding:12px 12px 16px 12px;box-shadow:0 10px 30px rgba(0,0,0,0.15);width:100%;max-width:720px;margin:0 auto;position:fixed;left:calc(50% + 12px);top:50%;transform:translate(-50%,-50%);z-index:10000;border:1px solid hsl(var(--border));"
         >
           <slot />
         </div>

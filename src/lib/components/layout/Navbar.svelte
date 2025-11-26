@@ -7,10 +7,10 @@
 
 </script>
 
-<nav class="border-b bg-white">
+<nav class="border-b bg-card text-card-foreground" style="border-color: hsl(var(--border));">
 	<div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
 		
-		<div class="text-xl font-semibold">School Registry</div>
+	<div class="text-xl font-semibold">School Registry</div>
 
 		<NavigationMenu>
 			<NavigationMenuList>

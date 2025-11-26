@@ -1,22 +1,27 @@
 :root{
-	--border: 214 18% 94%;
+	/* Borders: light warm gold/brown for thin separators */
+	--border: 32 40% 70%; /* warm gold-brown */
 	--input: 220 14% 96%;
-	--ring: 215 20% 65%;
-	--background: 0 0% 100%;
-	--foreground: 222 47% 11%;
-	--primary: 222 47% 11%;
+	/* Focus ring follow primary hue */
+	--ring: 217 88% 60%;
+	/* Page background set to #FFDC8F (HSL approximation) */
+	--background: 42 100% 81%;
+	/* Warm dark brown text (not pure black) */
+	--foreground: 25 30% 18%; /* dark warm brown */
+	/* Primary / accent for buttons: soft strong blue */
+	--primary: 217 88% 53%; /* ~#3B82F6 */
 	--primary-foreground: 0 0% 100%;
 	--secondary: 210 40% 96%;
-	--secondary-foreground: 220 13% 18%;
+	--secondary-foreground: 22 20% 28%;
 	--destructive: 0 84% 60%;
 	--muted: 210 16% 82%;
 	--accent: 240 14% 96%;
 	--radius: 0.5rem;
-	/* Card tokens used by shadcn components */
-	--card: 0 0% 100%;
-	--card-foreground: 222 47% 11%;
+	/* Card tokens used by shadcn-like components: cream/ivory blocks */
+	--card: 38 100% 94%; /* cream/ivory */
+	--card-foreground: 25 30% 18%; /* same warm brown for text on cards */
 	/* Muted/foreground helpers */
-	--muted-foreground: 215 16% 50%;
+	--muted-foreground: 25 12% 46%;
 	--accent-foreground: 220 13% 18%;
 }
 
@@ -25,6 +30,12 @@ html {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Use the background token for the page background so every route inherits it */
+body {
+	background-color: hsl(var(--background));
+	min-height: 100vh;
 }
 
 /* Fallback helpers for shadcn-like utility classes */
@@ -50,8 +61,10 @@ input, textarea, select,
 	height: 2.5rem !important; /* h-10 */
 	padding: 0.5rem 0.75rem !important; /* px-3 py-2 */
 	box-shadow: 0 1px 2px rgba(16,24,40,0.04) !important; /* subtle base shadow */
-	background-color: hsl(var(--background)) !important;
+	/* Use card background for controls so they sit as cream blocks on the warm page */
+	background-color: hsl(var(--card)) !important;
 	border: 1px solid hsl(var(--border)) !important;
+	color: hsl(var(--card-foreground)) !important;
 }
 
 input[data-slot="input"]:focus,
@@ -67,9 +80,9 @@ input:focus, textarea:focus, select:focus, .input:focus {
 	 trigger (button, span, or wrapper). Remove these overrides during final cleanup if
 	 you add a dedicated Button variant. */
 [data-slot="dropdown-menu-trigger"] {
-	background-color: hsl(var(--background)) !important;
+	background-color: hsl(var(--card)) !important;
 	border: 1px solid hsl(var(--border)) !important;
-	color: hsl(var(--foreground)) !important; /* black-ish */
+	color: hsl(var(--card-foreground)) !important;
 	border-radius: 0.5rem !important; /* rounded-lg */
 	height: 2.5rem !important; /* h-10 */
 	padding: 0.5rem 0.75rem !important; /* px-3 py-2 */
@@ -94,12 +107,14 @@ input[data-slot="search-input"], input[data-slot="search-input"]:focus {
    or animation classes. Targets the data-slot markers used by the dropdown components. */
 [data-slot="dropdown-menu-content"],
 [data-slot="dropdown-menu-sub-content"] {
-	background-color: #ffffff !important;
-	color: #000000 !important;
+	/* Keep the content opaque but use the card token so menus read as part of the card UI */
+	background-color: hsl(var(--card)) !important;
+	color: hsl(var(--card-foreground)) !important;
 	opacity: 1 !important;
 	backdrop-filter: none !important;
 	-webkit-backdrop-filter: none !important;
 	background-image: none !important;
+	border: 1px solid hsl(var(--border)) !important;
 }
 
 

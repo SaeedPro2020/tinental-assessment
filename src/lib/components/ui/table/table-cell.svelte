@@ -14,9 +14,10 @@
 	bind:this={ref}
 	data-slot="table-cell"
 	class={cn(
-		"whitespace-nowrap bg-clip-padding p-2 align-middle [&:has([role=checkbox])]:pe-0 border-b border-gray-200",
+		"whitespace-nowrap bg-clip-padding p-2 align-middle [&:has([role=checkbox])]:pe-0 border-b",
 		className
 	)}
+	style="border-color: hsl(var(--border));"
 	{...restProps}
 >
 	{@render children?.()}

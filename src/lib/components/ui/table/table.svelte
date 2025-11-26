@@ -17,8 +17,8 @@
 -->
 <div
 	data-slot="table-container"
-	class="relative rounded-lg border border-gray-300"
-	style="width:var(--table-container-width,680px); height:var(--table-container-height,310px); border-color:#D1D5DB !important; border-radius:6px;"
+	class="relative rounded-lg border"
+	style="width:var(--table-container-width,680px); height:var(--table-container-height,310px); border-color: hsl(var(--border)); border-radius:6px;"
 >
 	<!-- Inner scroll wrapper keeps scrollbars inside the fixed container -->
 	<div class="w-full h-full overflow-auto">

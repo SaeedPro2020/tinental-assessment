@@ -56,7 +56,7 @@
 <div class="flex justify-center mb-12">
   <Dialog.Root bind:open={dialogOpen}>
     <Dialog.Trigger on:click={() => { console.log('Dialog.Trigger clicked'); dialogOpen = true; }}>
-      <Button size="lg" class="bg-white text-black rounded-lg text-base" style="background:#fff;color:#000;min-height:44px;padding-left:18px;padding-right:18px;border-radius:8px">Add Student</Button>
+      <Button size="lg" class="bg-primary text-primary-foreground rounded-lg text-base" style="background:#fff;color:#000;min-height:44px;padding-left:18px;padding-right:18px;border-radius:8px">Add Student</Button>
     </Dialog.Trigger>
     <Dialog.Content open={dialogOpen} onClose={() => (dialogOpen = false)} class="sm:max-w-[425px]">
       <Dialog.Header>
@@ -93,7 +93,7 @@
       <Dialog.Footer>
         <!-- Footer: inline row, right aligned -->
         <div class="flex justify-end items-center mt-12">
-          <Button size="lg" class="bg-black text-white rounded-lg text-base" style="background:#000;color:#fff;min-height:44px;padding-left:18px;padding-right:18px;border-radius:8px" on:click={saveStudent}>Save changes</Button>
+          <Button size="lg" class="bg-primary text-primary-foreground rounded-lg text-base" on:click={saveStudent} style="background:#000;color:#fff;min-height:44px;padding-left:18px;padding-right:18px;border-radius:8px">Save changes</Button>
         </div>
       </Dialog.Footer>
     </Dialog.Content>
