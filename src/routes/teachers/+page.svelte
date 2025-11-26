@@ -28,7 +28,7 @@
 </script>
 
 <CrudPage
-  title="Teachers"
+  title="Teachers table"
   addButtonLabel="Add Teacher"
   {columns}
   {formFields}

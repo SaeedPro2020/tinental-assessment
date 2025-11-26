@@ -30,7 +30,7 @@
 </script>
 
 <CrudPage
-  title="Students"
+  title="Students table"
   addButtonLabel="Add Student"
   {columns}
   {formFields}
