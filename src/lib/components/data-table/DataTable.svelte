@@ -297,7 +297,7 @@
 
 <div class="w-full">
   <!-- Fixed-size centered container -->
-  <div class="rounded-lg border border-gray-300 mx-auto p-4 overflow-hidden" style="width:820px; height:570px; background: hsl(38 100% 94%); border-color: hsl(var(--border)); border-radius:6px;">
+  <div class="rounded-lg border border-gray-300 mx-auto p-4 overflow-hidden" style="width:820px; height:550px; background: hsl(38 100% 94%); border-color: hsl(var(--border)); border-radius:6px;">
   <!-- Spacer to separate top border from search bar -->
   <div style="height:3rem;"></div>
   <!-- Search bar -->
@@ -350,10 +350,10 @@
   <div style="height:2rem"></div>
   <div class="mt-8">
   <div class="mx-auto w-full max-w-[40rem]">
-    <Table.Root>
-      <Table.Header>
+    <Table.Root style="height:100px;">
+      <Table.Header style="height:50px;">
         {#each table.getHeaderGroups() as headerGroup}
-          <Table.Row>
+          <Table.Row style="height:50px;">
             {#each headerGroup.headers as header}
               <Table.Head>
                 {#if !header.isPlaceholder}

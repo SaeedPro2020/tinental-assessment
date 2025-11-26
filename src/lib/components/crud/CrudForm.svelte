@@ -1,11 +1,25 @@
 <script lang="ts">
+  /**
+   * Small reusable dialog form used by the CRUD pages.
+   * Accepts a list of form field descriptors and emits a `created` event
+   * with the submitted payload. Intentionally lightweight and framework-agnostic.
+   */
   import * as Dialog from "$lib/components/ui/dialog";
   import { Input } from "$lib/components/ui/input";
   import { Label } from "$lib/components/ui/label";
   import { Button } from "$lib/components/ui/button";
   import { createEventDispatcher } from 'svelte';
+  // Use a named type for clarity instead of an inline object shape
+  type FieldType = 'text' | 'number' | 'select';
 
-  export let formFields: { id: string; label: string; type: string; options?: string[] }[] = [];
+  interface FormField {
+    id: string;
+    label: string;
+    type: FieldType;
+    options?: string[];
+  }
+
+  export let formFields: FormField[] = [];
   export let addButtonLabel = 'Add';
   export let onCreate: (form: any) => Promise<void>;
 

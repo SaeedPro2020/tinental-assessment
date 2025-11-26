@@ -1,3 +1,7 @@
+/**
+ * Service layer for Teachers.
+ * Provides an in-memory list for the demo pages.
+ */
 import type { Teacher } from '$lib/types/teacher';
 
 let teachers: Teacher[] = [
@@ -10,16 +14,16 @@ let teachers: Teacher[] = [
 ];
 
 export const teacherService = {
-    listTeachers() {
+  listTeachers() {
     return [...teachers];
-    },
+  },
 
   createTeacher(teacher: Omit<Teacher, "id">) {
     const newTeacher: Teacher = {
       id: crypto.randomUUID(),
-      ...teacher
+      ...teacher,
     };
     teachers.push(newTeacher);
     return newTeacher;
-  }
+  },
 };

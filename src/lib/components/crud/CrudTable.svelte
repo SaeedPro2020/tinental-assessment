@@ -1,8 +1,14 @@
 <script lang="ts">
+  /**
+   * Thin adapter that maps a simple column descriptor to the TanStack
+   * ColumnDef shape expected by the DataTable component.
+   */
   import DataTable from "$lib/components/data-table/DataTable.svelte";
   import type { ColumnDef } from "@tanstack/table-core";
 
-  export let columns: { id: string; label: string }[] = [];
+  type ColumnSimple = { id: string; label: string };
+
+  export let columns: ColumnSimple[] = [];
   export let data: any[] = [];
 
   // Map simple column defs to TanStack ColumnDef shape expected by DataTable
